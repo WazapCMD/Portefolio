@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nael Talbi | Portfolio BTS SIO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Nael Talbi | Portfolio SIO SISR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Variables de couleurs - Style moderne/sombre type Cloud */
+        /* === VARIABLES & RESET === */
         :root {
-            --bg-color: #0d1117;
-            --surface-color: #161b22;
-            --text-primary: #c9d1d9;
-            --text-secondary: #8b949e;
-            --accent-color: #58a6ff;
-            --border-color: #30363d;
+            --bg-dark: #050505;
+            --card-bg: #111111;
+            --border-color: #222222;
+            --text-main: #ededed;
+            --text-muted: #888888;
+            --accent-glow: rgba(56, 189, 248, 0.15);
         }
 
         * {
@@ -24,178 +24,346 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Navigation */
+        html { scroll-behavior: smooth; }
+
+        /* === TYPOGRAPHIE === */
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* === NAVIGATION (GLASSMORPHISM) === */
         header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 10%;
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
-            background-color: rgba(13, 17, 23, 0.9);
-            position: sticky;
-            top: 0;
             z-index: 1000;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--text-primary);
             text-decoration: none;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
         }
 
-        .logo span { color: var(--accent-color); }
+        nav { display: flex; gap: 30px; }
 
         nav a {
-            color: var(--text-primary);
+            color: var(--text-muted);
             text-decoration: none;
-            margin-left: 30px;
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.95rem;
             transition: color 0.3s;
         }
 
-        nav a:hover { color: var(--accent-color); }
+        nav a:hover { color: var(--text-main); }
 
-        /* Section Hero (Accueil) */
+        /* === HERO SECTION === */
         .hero {
-            padding: 100px 10%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
+            padding: 0 10%;
+            background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, var(--bg-dark) 60%);
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
             margin-bottom: 20px;
-            color: #ffffff;
+            letter-spacing: -1.5px;
         }
 
         .hero p {
             font-size: 1.2rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            max-width: 600px;
             margin-bottom: 40px;
         }
 
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
         .btn {
-            background-color: var(--accent-color);
-            color: #000;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 6px;
+            padding: 12px 28px;
+            border-radius: 8px;
             font-weight: 600;
-            transition: background-color 0.3s;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .btn:hover { background-color: #3182ce; color: #fff; }
+        .btn-primary {
+            background: var(--text-main);
+            color: var(--bg-dark);
+        }
 
-        /* Section Projets & Tâches */
-        .section-title {
+        .btn-primary:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: #555;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* === SECTIONS COMMUNES === */
+        section { padding: 100px 10%; }
+
+        .section-header {
             text-align: center;
-            font-size: 2rem;
-            margin: 60px 0 40px;
-            color: #fff;
+            margin-bottom: 60px;
         }
 
-        .projects-grid {
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        /* === COMPÉTENCES === */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            color: var(--text-main);
+            border-color: #38bdf8;
+            background: var(--accent-glow);
+        }
+
+        /* === PROJETS === */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 0 10%;
-            margin-bottom: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .card {
-            background-color: var(--surface-color);
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 30px;
-            transition: transform 0.3s, border-color 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .card:hover::before { opacity: 1; }
 
         .card:hover {
             transform: translateY(-5px);
-            border-color: var(--accent-color);
+            border-color: #444;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .card-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
+            display: inline-block;
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
 
         .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
         }
 
         .card p {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 0.95rem;
         }
 
-        /* Footer */
+        /* === FOOTER === */
         footer {
             text-align: center;
             padding: 40px 10%;
             border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* === ANIMATIONS (JS) === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            nav { display: none; } /* Navigation simple pour mobile */
+            nav { display: none; } /* On cache le menu sur mobile pour faire simple */
+            .btn-group { flex-direction: column; }
+            section { padding: 80px 5%; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo">Nael<span>Talbi</span></a>
+        <a href="#" class="logo">Nael<span class="text-gradient">Talbi</span></a>
         <nav>
             <a href="#accueil">Accueil</a>
-            <a href="#projets">Mes Réalisations</a>
+            <a href="#competences">Compétences</a>
+            <a href="#projets">Projets</a>
             <a href="mailto:ton.email@exemple.com">Contact</a>
         </nav>
     </header>
 
     <section id="accueil" class="hero">
-        <h1>Bonjour, je suis Nael Talbi</h1>
-        <p>Étudiant en BTS SIO (Services Informatiques aux Organisations). Passionné par l'infrastructure, l'administration système et les réseaux. Découvrez mes projets et compétences acquis lors de ma formation.</p>
-        <a href="#projets" class="btn">Voir mes projets</a>
+        <div class="hero-badge">Étudiant BTS SIO - Option SISR</div>
+        <h1 class="reveal">Architecte de votre <br><span class="text-gradient">Infrastructure IT</span></h1>
+        <p class="reveal">Passionné par l'administration système, les réseaux et la sécurité. Découvrez comment je construis et maintiens des environnements informatiques fiables.</p>
+        
+        <div class="btn-group reveal">
+            <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+            <a href="cv.pdf" target="_blank" class="btn btn-secondary">Télécharger mon CV</a>
+        </div>
     </section>
 
-    <h2 class="section-title" id="projets">Mes Réalisations Techniques</h2>
-    
-    <section class="projects-grid">
-        <div class="card">
-            <div class="card-icon">🔐</div>
-            <h3>Déploiement Active Directory</h3>
-            <p>Mise en place d'un environnement Windows Server. Création de l'arborescence (OU), gestion des utilisateurs, des groupes, et déploiement de stratégies de groupe (GPO) pour sécuriser le parc informatique.</p>
+    <section id="competences" class="reveal">
+        <div class="section-header">
+            <h2>Expertise Technique</h2>
         </div>
-
-        <div class="card">
-            <div class="card-icon">🎫</div>
-            <h3>Mise en place de GLPI</h3>
-            <p>Installation et configuration de la solution open-source GLPI pour la gestion de parc informatique (ITSM). Mise en place d'un système de ticketing pour le support utilisateur et inventaire matériel.</p>
+        <div class="skills-container">
+            <span class="skill-tag">Windows Server</span>
+            <span class="skill-tag">Active Directory / GPO</span>
+            <span class="skill-tag">GNU/Linux (Debian)</span>
+            <span class="skill-tag">Routage & Switching</span>
+            <span class="skill-tag">GLPI / Ticketing</span>
+            <span class="skill-tag">Virtualisation (Hyper-V / VMware)</span>
+            <span class="skill-tag">OPNsense / Pare-feu</span>
+            <span class="skill-tag">Scripts PowerShell / Bash</span>
         </div>
+    </section>
 
-        <div class="card">
-            <div class="card-icon">🌐</div>
-            <h3>Architecture Réseau</h3>
-            <p>Conception et configuration d'une architecture réseau locale (LAN). Paramétrage des switchs et routeurs, mise en place de VLANs pour segmenter le trafic, et configuration des services DHCP/DNS.</p>
+    <section id="projets">
+        <div class="section-header reveal">
+            <h2>Réalisations & Projets</h2>
+        </div>
+        
+        <div class="grid">
+            <div class="card reveal">
+                <div class="card-icon">🔐</div>
+                <h3>Domaine Active Directory</h3>
+                <p>Création d'un environnement d'entreprise simulé. Déploiement de contrôleurs de domaine, gestion des droits utilisateurs (OU), et automatisation de la sécurité via des Stratégies de Groupe (GPO).</p>
+            </div>
+
+            <div class="card reveal">
+                <div class="card-icon">🎫</div>
+                <h3>Intégration GLPI</h3>
+                <p>Déploiement d'un serveur LAMP pour héberger la solution GLPI. Configuration du système de Helpdesk, création de règles d'affectation automatique et gestion de l'inventaire parc avec l'agent OCS/FusionInventory.</p>
+            </div>
+
+            <div class="card reveal">
+                <div class="card-icon">🌐</div>
+                <h3>Architecture Réseau Sécurisée</h3>
+                <p>Conception d'une topologie réseau complète. Segmentation du trafic par VLANs, configuration de routeurs, et mise en place d'un pare-feu OPNsense pour sécuriser l'accès WAN et filtrer les flux LAN.</p>
+            </div>
+            
+            <div class="card reveal">
+                <div class="card-icon">💾</div>
+                <h3>Sauvegarde & Redondance</h3>
+                <p>Mise en place de solutions de tolérance aux pannes. Configuration de baies de stockage (RAID) et planification de routines de sauvegarde automatisées pour garantir la continuité de service (PRA/PCA).</p>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Nael Talbi - Portfolio BTS SIO. Hébergé avec ❤️ sur GitHub Pages.</p>
+        <p>&copy; 2026 Nael Talbi. Hébergé sur le Cloud via GitHub Pages.</p>
     </footer>
 
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Déclencher au chargement
+    </script>
 </body>
 </html>
