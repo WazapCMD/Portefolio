@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -9,11 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #08111f;
-            --bg-soft: rgba(10, 22, 38, 0.82);
+            --bg: #07111d;
             --panel: rgba(10, 24, 43, 0.76);
-            --panel-strong: rgba(11, 31, 54, 0.96);
             --line: rgba(142, 187, 255, 0.14);
+            --line-soft: rgba(255, 255, 255, 0.06);
             --text: #f4f7fb;
             --muted: #9fb1c6;
             --accent: #7cd2ff;
@@ -32,9 +31,7 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: "Manrope", sans-serif;
@@ -60,15 +57,7 @@
             z-index: -1;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
+        a { color: inherit; text-decoration: none; }
 
         .container {
             width: min(calc(100% - 2rem), var(--max-width));
@@ -80,8 +69,8 @@
             top: 0;
             z-index: 20;
             backdrop-filter: blur(18px);
-            background: rgba(7, 14, 24, 0.7);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(7, 14, 24, 0.72);
+            border-bottom: 1px solid var(--line-soft);
         }
 
         .topbar-inner {
@@ -101,8 +90,8 @@
         }
 
         .brand-badge {
-            width: 2.65rem;
-            height: 2.65rem;
+            width: 2.7rem;
+            height: 2.7rem;
             border-radius: 16px;
             display: grid;
             place-items: center;
@@ -117,9 +106,7 @@
             line-height: 1.1;
         }
 
-        .brand-text strong {
-            font-size: 0.98rem;
-        }
+        .brand-text strong { font-size: 0.98rem; }
 
         .brand-text span {
             font-size: 0.75rem;
@@ -132,37 +119,35 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 1.35rem;
+            gap: 1.15rem;
+            flex-wrap: wrap;
         }
 
         nav a {
             color: var(--muted);
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             font-weight: 700;
             transition: color 0.25s ease;
         }
 
         nav a:hover,
-        nav a:focus-visible {
-            color: var(--text);
-        }
+        nav a:focus-visible { color: var(--text); }
 
-        .hero {
-            padding: 4.8rem 0 2.5rem;
-        }
+        .hero { padding: 4.8rem 0 2.4rem; }
 
         .hero-shell {
             display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
             gap: 1.5rem;
-            align-items: stretch;
         }
 
         .hero-main,
         .hero-side,
         .panel,
         .timeline-item,
-        .skill-card {
+        .skill-card,
+        .experience-card,
+        .contact-strip {
             background: var(--panel);
             border: 1px solid var(--line);
             border-radius: var(--radius-xl);
@@ -186,7 +171,8 @@
             background: radial-gradient(circle, rgba(124, 210, 255, 0.24), transparent 68%);
         }
 
-        .eyebrow {
+        .eyebrow,
+        .section-tag {
             display: inline-flex;
             align-items: center;
             gap: 0.55rem;
@@ -201,35 +187,52 @@
             text-transform: uppercase;
         }
 
+        .section-tag {
+            padding: 0;
+            background: none;
+            border: 0;
+            color: var(--accent);
+            margin-bottom: 0.55rem;
+        }
+
         .hero h1 {
             margin-top: 1.3rem;
             font-family: "Sora", sans-serif;
-            font-size: clamp(2.7rem, 5vw, 5.4rem);
+            font-size: clamp(2.9rem, 5vw, 5.4rem);
             line-height: 0.98;
             letter-spacing: -0.06em;
             max-width: 10ch;
         }
 
+        .hero p,
+        .section-head p,
+        .project-card p,
+        .timeline-item p,
+        .skill-card p,
+        .experience-card p,
+        .experience-card li,
+        .contact-strip p,
+        footer {
+            color: var(--muted);
+        }
+
         .hero p {
             margin-top: 1.2rem;
             max-width: 62ch;
-            color: var(--muted);
             font-size: 1.03rem;
         }
 
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.9rem;
-            margin-top: 1.9rem;
-        }
-
-        .social-links {
+        .hero-actions,
+        .social-links,
+        .project-tags,
+        .chips {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
-            margin-top: 1rem;
         }
+
+        .hero-actions { margin-top: 1.9rem; }
+        .social-links { margin-top: 1rem; }
 
         .btn,
         .btn-secondary,
@@ -238,7 +241,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.55rem;
-            min-height: 3.2rem;
+            min-height: 3.1rem;
             padding: 0 1.2rem;
             border-radius: 999px;
             font-weight: 800;
@@ -251,26 +254,16 @@
             box-shadow: 0 18px 34px rgba(124, 210, 255, 0.18);
         }
 
-        .btn-secondary {
-            color: var(--text);
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
+        .btn-secondary,
         .social-link {
-            min-height: 2.8rem;
-            padding: 0 1rem;
             color: var(--text);
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 0.92rem;
         }
 
         .btn:hover,
         .btn-secondary:hover,
-        .social-link:hover {
-            transform: translateY(-2px);
-        }
+        .social-link:hover { transform: translateY(-2px); }
 
         .hero-metrics {
             display: grid;
@@ -279,11 +272,14 @@
             margin-top: 2rem;
         }
 
-        .metric {
+        .metric,
+        .profile-card,
+        .stack-item,
+        .mini-list li {
             padding: 1rem;
             border-radius: var(--radius-md);
             background: rgba(255, 255, 255, 0.035);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .metric strong {
@@ -293,31 +289,19 @@
             letter-spacing: -0.04em;
         }
 
-        .metric span {
-            color: var(--muted);
-            font-size: 0.9rem;
-        }
+        .metric span,
+        .stack-item span,
+        .mini-list span { font-size: 0.9rem; color: var(--muted); }
 
         .hero-side {
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             gap: 1rem;
-            background:
-                linear-gradient(180deg, rgba(14, 34, 56, 0.92), rgba(9, 20, 35, 0.95)),
-                var(--panel);
+            background: linear-gradient(180deg, rgba(14, 34, 56, 0.92), rgba(9, 20, 35, 0.95));
         }
 
-        .profile-card {
-            padding: 1.2rem;
-            border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .profile-card small,
-        .section-tag {
+        .profile-card small {
             display: block;
             color: var(--accent);
             font-size: 0.78rem;
@@ -327,22 +311,10 @@
             margin-bottom: 0.6rem;
         }
 
-        .profile-card h2 {
-            font-size: 1.35rem;
-            line-height: 1.2;
-            margin-bottom: 0.6rem;
-        }
-
-        .profile-card p {
-            color: var(--muted);
-            font-size: 0.96rem;
-        }
+        .profile-card h2 { font-size: 1.35rem; line-height: 1.2; margin-bottom: 0.6rem; }
 
         .stack-list,
-        .mini-list {
-            display: grid;
-            gap: 0.7rem;
-        }
+        .mini-list { display: grid; gap: 0.7rem; }
 
         .stack-item,
         .mini-list li {
@@ -351,27 +323,9 @@
             align-items: center;
             justify-content: space-between;
             gap: 0.75rem;
-            padding: 0.9rem 1rem;
-            border-radius: var(--radius-md);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .stack-item strong,
-        .mini-list strong {
-            font-size: 0.97rem;
-        }
-
-        .stack-item span,
-        .mini-list span {
-            color: var(--muted);
-            font-size: 0.85rem;
-            text-align: right;
-        }
-
-        main section {
-            padding: 1.2rem 0 0.8rem;
-        }
+        main section { padding: 1.2rem 0 0.85rem; }
 
         .section-head {
             display: flex;
@@ -387,30 +341,37 @@
             letter-spacing: -0.05em;
         }
 
-        .section-head p {
-            max-width: 38rem;
-            color: var(--muted);
-        }
+        .section-head p { max-width: 38rem; }
 
         .projects-grid,
-        .skills-grid {
+        .skills-grid,
+        .timeline,
+        .experience-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 1rem;
         }
 
-        .panel {
-            padding: 1.35rem;
-        }
+        .projects-grid,
+        .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-        .project-card {
+        .timeline,
+        .experience-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+        .panel,
+        .skill-card,
+        .timeline-item,
+        .experience-card { padding: 1.35rem; }
+
+        .project-card,
+        .experience-card {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             min-height: 100%;
         }
 
-        .project-top {
+        .project-top,
+        .experience-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -423,12 +384,15 @@
             border-radius: 14px;
             display: grid;
             place-items: center;
-            font-size: 1.25rem;
+            font-size: 1.05rem;
+            font-weight: 800;
             background: linear-gradient(135deg, rgba(124, 210, 255, 0.2), rgba(156, 240, 221, 0.2));
             border: 1px solid rgba(124, 210, 255, 0.16);
         }
 
-        .project-kicker {
+        .project-kicker,
+        .experience-date,
+        .timeline-year {
             color: var(--accent);
             font-size: 0.82rem;
             font-weight: 800;
@@ -436,181 +400,45 @@
             text-transform: uppercase;
         }
 
-        .project-card h3 {
-            font-size: 1.35rem;
-            line-height: 1.2;
-        }
+        .project-card h3,
+        .experience-card h3,
+        .timeline-item h3,
+        .skill-card h3 { font-size: 1.2rem; line-height: 1.2; }
 
-        .project-card p {
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.55rem;
-            margin-top: auto;
-        }
-
-        .project-tags span {
+        .project-tags span,
+        .chips span {
             display: inline-flex;
             padding: 0.45rem 0.7rem;
             border-radius: 999px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 0.8rem;
-            color: var(--muted);
-            font-weight: 700;
-        }
-
-        .timeline {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
-        }
-
-        .experience-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
-        }
-
-        .timeline-item {
-            padding: 1.4rem;
-        }
-
-        .experience-card {
-            padding: 1.4rem;
-        }
-
-        .timeline-year {
-            display: inline-flex;
-            margin-bottom: 0.9rem;
-            color: var(--accent-warm);
-            font-size: 0.8rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .timeline-item h3 {
-            font-size: 1.18rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-item strong {
-            display: block;
-            color: #d8e4f1;
-            margin-bottom: 0.65rem;
-        }
-
-        .timeline-item p {
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-
-        .experience-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .experience-date {
-            color: var(--accent);
-            font-size: 0.8rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .experience-card h3 {
-            font-size: 1.18rem;
-        }
-
-        .experience-card p,
-        .experience-card ul {
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-
-        .experience-card ul {
-            padding-left: 1.1rem;
-            margin-top: 0.9rem;
-        }
-
-        .experience-card li + li {
-            margin-top: 0.45rem;
-        }
-
-        .skill-card {
-            padding: 1.35rem;
-        }
-
-        .skill-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .skill-card p {
-            color: var(--muted);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.55rem;
-        }
-
-        .chips span {
-            padding: 0.5rem 0.7rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.045);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.82rem;
             color: #d3dfec;
-            font-size: 0.84rem;
             font-weight: 700;
         }
+
+        .experience-card ul { padding-left: 1.1rem; margin-top: 0.9rem; }
+        .experience-card li + li { margin-top: 0.45rem; }
 
         .contact-strip {
             margin: 1.4rem 0 4rem;
-            padding: 1.3rem 1.5rem;
-            border-radius: var(--radius-xl);
-            background: linear-gradient(135deg, rgba(124, 210, 255, 0.14), rgba(156, 240, 221, 0.08));
-            border: 1px solid rgba(124, 210, 255, 0.16);
+            padding: 1.4rem 1.5rem;
             display: flex;
             justify-content: space-between;
             gap: 1rem;
             align-items: center;
+            background: linear-gradient(135deg, rgba(124, 210, 255, 0.14), rgba(156, 240, 221, 0.08));
         }
 
-        .contact-strip p {
-            color: var(--muted);
-            max-width: 44rem;
-        }
-
-        footer {
-            padding: 0 0 2.2rem;
-            color: var(--muted);
-            font-size: 0.92rem;
-        }
+        footer { padding: 0 0 2.2rem; font-size: 0.92rem; }
 
         @media (max-width: 1024px) {
             .hero-shell,
             .projects-grid,
             .skills-grid,
             .timeline,
-            .experience-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                max-width: none;
-            }
+            .experience-grid { grid-template-columns: 1fr; }
+            .hero h1 { max-width: none; }
         }
 
         @media (max-width: 720px) {
@@ -621,28 +449,17 @@
                 align-items: flex-start;
             }
 
-            nav {
-                flex-wrap: wrap;
-                gap: 0.8rem;
-            }
-
-            .hero {
-                padding-top: 3rem;
-            }
+            .hero { padding-top: 3rem; }
 
             .hero-main,
             .hero-side,
             .panel,
             .timeline-item,
-            .experience-card,
             .skill-card,
-            .contact-strip {
-                border-radius: 22px;
-            }
+            .experience-card,
+            .contact-strip { border-radius: 22px; }
 
-            .hero-metrics {
-                grid-template-columns: 1fr;
-            }
+            .hero-metrics { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -661,8 +478,8 @@
                 <a href="#accueil">Accueil</a>
                 <a href="#projets">Projets</a>
                 <a href="#parcours">Parcours</a>
-                <a href="#competences">Compétences</a>
-                <a href="#experience">ExpÃ©rience</a>
+                <a href="#experience">Experience</a>
+                <a href="#competences">Competences</a>
                 <a href="mailto:nael.talbi@example.com">Contact</a>
             </nav>
         </div>
@@ -672,17 +489,17 @@
         <section class="hero" id="accueil">
             <div class="hero-shell">
                 <div class="hero-main">
-                    <span class="eyebrow">Infrastructure · Système · Réseau</span>
-                    <h1>Je conçois des environnements IT fiables, propres et prêts à évoluer.</h1>
+                    <span class="eyebrow">Infrastructure - Systeme - Reseau</span>
+                    <h1>Je construis des environnements IT fiables, lisibles et prets a evoluer.</h1>
                     <p>
-                        Étudiant en BTS SIO, je développe des projets orientés administration système, services réseau
-                        et support informatique. L’objectif de ce portfolio est de montrer un profil sérieux, technique
-                        et capable de transformer un besoin terrain en solution concrète.
+                        Etudiant en BTS SIO, je developpe des projets orientes administration systeme, services reseau
+                        et support informatique. Ce portfolio presente un profil technique, rigoureux et capable de
+                        transformer un besoin terrain en solution concrete.
                     </p>
 
                     <div class="hero-actions">
-                        <a class="btn" href="#projets">Voir mes réalisations</a>
-                        <a class="btn-secondary" href="#competences">Explorer mes compétences</a>
+                        <a class="btn" href="#projets">Voir mes realisations</a>
+                        <a class="btn-secondary" href="#competences">Explorer mes competences</a>
                     </div>
 
                     <div class="social-links">
@@ -694,15 +511,15 @@
                     <div class="hero-metrics">
                         <div class="metric">
                             <strong>3+</strong>
-                            <span>projets techniques présentés</span>
+                            <span>projets techniques presentes</span>
                         </div>
                         <div class="metric">
                             <strong>BTS SIO</strong>
-                            <span>orientation SISR / infrastructure</span>
+                            <span>orientation SISR et infrastructure</span>
                         </div>
                         <div class="metric">
                             <strong>Support IT</strong>
-                            <span>approche terrain et résolution</span>
+                            <span>approche terrain et resolution</span>
                         </div>
                     </div>
                 </div>
@@ -710,10 +527,10 @@
                 <aside class="hero-side">
                     <div class="profile-card">
                         <small>Positionnement</small>
-                        <h2>Un portfolio plus premium, inspiré d’un site perso moderne.</h2>
+                        <h2>Un portfolio personnel plus premium, inspire des sites modernes de presentation.</h2>
                         <p>
-                            Refonte visuelle en cartes, grandes typographies et ambiance tech élégante pour donner
-                            immédiatement une impression plus professionnelle.
+                            Grande typographie, cartes profondes, ambiance tech elegante et hierarchie visuelle plus
+                            claire pour donner une impression immediate de serieux.
                         </p>
                     </div>
 
@@ -727,7 +544,7 @@
                             <span>GLPI, ticketing, inventaire</span>
                         </div>
                         <div class="stack-item">
-                            <strong>Réseaux locaux</strong>
+                            <strong>Reseaux locaux</strong>
                             <span>LAN, VLAN, DHCP, DNS</span>
                         </div>
                     </div>
@@ -735,11 +552,11 @@
                     <ul class="mini-list">
                         <li>
                             <strong>Objectif</strong>
-                            <span>Présenter un profil clair et crédible</span>
+                            <span>Presenter un profil clair et credible</span>
                         </li>
                         <li>
-                            <strong>Ton visuel</strong>
-                            <span>Sobre, digital, structuré</span>
+                            <strong>Style</strong>
+                            <span>Sobre, digital, structure</span>
                         </li>
                     </ul>
                 </aside>
@@ -750,11 +567,11 @@
             <div class="section-head">
                 <div>
                     <span class="section-tag">Projets</span>
-                    <h2>Réalisations techniques</h2>
+                    <h2>Realisations techniques</h2>
                 </div>
                 <p>
-                    Une sélection de travaux qui mettent en avant la logique d’architecture, le déploiement de services
-                    et la capacité à documenter ou sécuriser un environnement informatique.
+                    Une selection de travaux qui montrent la logique d architecture, le deploiement de services
+                    et la capacite a documenter ou securiser un environnement informatique.
                 </p>
             </div>
 
@@ -764,17 +581,17 @@
                         <span class="project-badge">AD</span>
                         <span class="project-kicker">Infrastructure</span>
                     </div>
-                    <h3>Déploiement d’un Active Directory</h3>
+                    <h3>Deploiement d un Active Directory</h3>
                     <p>
-                        Mise en place d’un environnement Windows Server avec organisation par unités, création des
-                        comptes, gestion des groupes et application de GPO pour fiabiliser l’administration et la
-                        sécurité du parc.
+                        Mise en place d un environnement Windows Server avec organisation par unites, creation des
+                        comptes, gestion des groupes et application de GPO pour fiabiliser l administration et la
+                        securite du parc.
                     </p>
                     <div class="project-tags">
                         <span>Windows Server</span>
                         <span>Active Directory</span>
                         <span>GPO</span>
-                        <span>Sécurité</span>
+                        <span>Securite</span>
                     </div>
                 </article>
 
@@ -783,10 +600,10 @@
                         <span class="project-badge">IT</span>
                         <span class="project-kicker">Support</span>
                     </div>
-                    <h3>Intégration de GLPI pour la gestion de parc</h3>
+                    <h3>Integration de GLPI pour la gestion de parc</h3>
                     <p>
-                        Installation et configuration d’une solution de ticketing et d’inventaire afin de centraliser
-                        les demandes de support, suivre les équipements et améliorer l’organisation des interventions.
+                        Installation et configuration d une solution de ticketing et d inventaire afin de centraliser
+                        les demandes de support, suivre les equipements et ameliorer l organisation des interventions.
                     </p>
                     <div class="project-tags">
                         <span>GLPI</span>
@@ -799,13 +616,13 @@
                 <article class="panel project-card">
                     <div class="project-top">
                         <span class="project-badge">NET</span>
-                        <span class="project-kicker">Réseau</span>
+                        <span class="project-kicker">Reseau</span>
                     </div>
-                    <h3>Architecture réseau locale segmentée</h3>
+                    <h3>Architecture reseau locale segmentee</h3>
                     <p>
-                        Conception d’un réseau local avec segmentation VLAN, configuration de services DHCP et DNS,
-                        préparation des équipements d’interconnexion et réflexion sur la fluidité comme sur la sécurité
-                        des échanges.
+                        Conception d un reseau local avec segmentation VLAN, configuration de services DHCP et DNS,
+                        preparation des equipements d interconnexion et reflexion sur la fluidite comme sur la securite
+                        des echanges.
                     </p>
                     <div class="project-tags">
                         <span>LAN</span>
@@ -824,29 +641,27 @@
                     <h2>Formation et progression</h2>
                 </div>
                 <p>
-                    Un socle BTS SIO renforcé par des projets pratiques et une orientation marquée vers les systèmes,
-                    l’administration réseau et la résolution de problèmes utilisateurs.
+                    Un socle BTS SIO renforce par des projets pratiques et une orientation marquee vers les systemes,
+                    l administration reseau et la resolution de problemes utilisateurs.
                 </p>
             </div>
 
             <div class="timeline">
                 <article class="timeline-item">
-                    <span class="timeline-year">Aujourd’hui</span>
+                    <span class="timeline-year">Aujourd hui</span>
                     <h3>BTS SIO</h3>
-                    <strong>Services Informatiques aux Organisations</strong>
                     <p>
-                        Développement des compétences en administration système, maintenance de services, architecture
-                        réseau et méthodologie de projet dans un cadre professionnalisant.
+                        Developpement des competences en administration systeme, maintenance de services, architecture
+                        reseau et methodologie de projet dans un cadre professionnalisant.
                     </p>
                 </article>
 
                 <article class="timeline-item">
-                    <span class="timeline-year">Projet pédagogique</span>
-                    <h3>Montée en compétence SISR</h3>
-                    <strong>Infrastructure, supervision et support</strong>
+                    <span class="timeline-year">Montee en puissance</span>
+                    <h3>Orientation SISR</h3>
                     <p>
-                        Mise en pratique sur des cas concrets mêlant déploiement, configuration, gestion des incidents
-                        et documentation d’environnements techniques.
+                        Mise en pratique sur des cas concrets melant deploiement, configuration, gestion des incidents
+                        et documentation d environnements techniques.
                     </p>
                 </article>
             </div>
@@ -855,11 +670,11 @@
         <section id="experience">
             <div class="section-head">
                 <div>
-                    <span class="section-tag">ExpÃ©rience</span>
+                    <span class="section-tag">Experience</span>
                     <h2>Ce que je peux apporter en entreprise</h2>
                 </div>
                 <p>
-                    Une lecture plus orientÃ©e terrain du profil, pour montrer la valeur opÃ©rationnelle au delÃ  des
+                    Une lecture plus orientee terrain du profil, pour montrer la valeur operationnelle au dela des
                     projets scolaires.
                 </p>
             </div>
@@ -870,9 +685,9 @@
                         <h3>Support et assistance</h3>
                         <span class="experience-date">Usage quotidien</span>
                     </div>
-                    <p>Intervenir sur les incidents, qualifier un problÃ¨me et proposer une rÃ©solution claire aux utilisateurs.</p>
+                    <p>Intervenir sur les incidents, qualifier un probleme et proposer une resolution claire aux utilisateurs.</p>
                     <ul>
-                        <li>Diagnostic poste, compte, accÃ¨s et connectivitÃ©</li>
+                        <li>Diagnostic poste, compte, acces et connectivite</li>
                         <li>Communication simple et rassurante avec les utilisateurs</li>
                         <li>Suivi des demandes et priorisation</li>
                     </ul>
@@ -883,11 +698,11 @@
                         <h3>Administration et maintenance</h3>
                         <span class="experience-date">Environnement Windows</span>
                     </div>
-                    <p>Participer Ã  la gestion dâ€™un parc, maintenir des services et garder une base technique propre.</p>
+                    <p>Participer a la gestion d un parc, maintenir des services et garder une base technique propre.</p>
                     <ul>
-                        <li>CrÃ©ation de comptes, groupes et droits</li>
-                        <li>ContrÃ´le des configurations et des stratÃ©gies</li>
-                        <li>Documentation et reprise des procÃ©dures</li>
+                        <li>Creation de comptes, groupes et droits</li>
+                        <li>Controle des configurations et des strategies</li>
+                        <li>Documentation et reprise des procedures</li>
                     </ul>
                 </article>
             </div>
@@ -896,19 +711,19 @@
         <section id="competences">
             <div class="section-head">
                 <div>
-                    <span class="section-tag">Compétences</span>
+                    <span class="section-tag">Competences</span>
                     <h2>Ce que je sais mettre en place</h2>
                 </div>
                 <p>
-                    Les compétences ci-dessous reflètent un profil polyvalent, tourné à la fois vers la mise en œuvre,
-                    l’administration quotidienne et l’accompagnement des utilisateurs.
+                    Les competences ci dessous refletent un profil polyvalent, tourne a la fois vers la mise en oeuvre,
+                    l administration quotidienne et l accompagnement des utilisateurs.
                 </p>
             </div>
 
             <div class="skills-grid">
                 <article class="skill-card">
-                    <h3>Système</h3>
-                    <p>Configuration de serveurs, gestion des comptes, politiques de sécurité et maintenance d’environnement Windows.</p>
+                    <h3>Systeme</h3>
+                    <p>Configuration de serveurs, gestion des comptes, politiques de securite et maintenance d environnement Windows.</p>
                     <div class="chips">
                         <span>Windows Server</span>
                         <span>Active Directory</span>
@@ -918,8 +733,8 @@
                 </article>
 
                 <article class="skill-card">
-                    <h3>Réseau</h3>
-                    <p>Conception de topologies locales, segmentation logique du trafic et configuration des services d’adressage.</p>
+                    <h3>Reseau</h3>
+                    <p>Conception de topologies locales, segmentation logique du trafic et configuration des services d adressage.</p>
                     <div class="chips">
                         <span>VLAN</span>
                         <span>DHCP</span>
@@ -929,8 +744,8 @@
                 </article>
 
                 <article class="skill-card">
-                    <h3>Support & gestion</h3>
-                    <p>Suivi des incidents, organisation du support utilisateur et structuration des demandes grâce aux bons outils.</p>
+                    <h3>Support et gestion</h3>
+                    <p>Suivi des incidents, organisation du support utilisateur et structuration des demandes grace aux bons outils.</p>
                     <div class="chips">
                         <span>GLPI</span>
                         <span>Ticketing</span>
@@ -944,9 +759,10 @@
         <div class="contact-strip">
             <div>
                 <span class="section-tag">Contact</span>
-                <h2>Disponible pour échanger sur un stage, une alternance ou un projet.</h2>
+                <h2>Disponible pour echanger sur un stage, une alternance ou un projet.</h2>
                 <p>
-                    Remplacez l’adresse e-mail de démonstration par votre vraie adresse pour finaliser le portfolio.
+                    Pensez a remplacer les liens GitHub, LinkedIn et l adresse email par vos vraies informations pour
+                    finaliser le portfolio.
                 </p>
             </div>
             <a class="btn" href="mailto:nael.talbi@example.com">Me contacter</a>
@@ -954,7 +770,7 @@
     </main>
 
     <footer class="container">
-        <p>&copy; 2026 Nael Talbi. Portfolio repensé dans une esthétique tech premium inspirée d’un site personnel moderne.</p>
+        <p>&copy; 2026 Nael Talbi. Portfolio repense dans une esthetique tech premium inspiree d un site personnel moderne.</p>
     </footer>
 </body>
 </html>
