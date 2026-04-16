@@ -18,6 +18,8 @@
             --accent: #7cd2ff;
             --accent-strong: #4e8cff;
             --accent-warm: #9cf0dd;
+            --cyber: #6effb8;
+            --cyber-strong: #2eea8f;
             --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
             --radius-xl: 28px;
             --radius-lg: 22px;
@@ -37,9 +39,9 @@
             font-family: "Manrope", sans-serif;
             color: var(--text);
             background:
-                radial-gradient(circle at top left, rgba(124, 210, 255, 0.18), transparent 28%),
+                radial-gradient(circle at top left, rgba(110, 255, 184, 0.14), transparent 22%),
                 radial-gradient(circle at 85% 10%, rgba(78, 140, 255, 0.16), transparent 24%),
-                linear-gradient(180deg, #07111d 0%, #091522 52%, #071019 100%);
+                linear-gradient(180deg, #061019 0%, #08131f 42%, #050c14 100%);
             min-height: 100vh;
             line-height: 1.65;
         }
@@ -133,12 +135,22 @@
         nav a:hover,
         nav a:focus-visible { color: var(--text); }
 
+        .nav-links a.is-active {
+            color: var(--text);
+            text-shadow: 0 0 18px rgba(124, 210, 255, 0.35);
+        }
+
         .hero { padding: 4.8rem 0 2.4rem; }
 
         .hero-shell {
             display: grid;
             grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
             gap: 1.5rem;
+        }
+
+        .hero-column {
+            display: grid;
+            gap: 1rem;
         }
 
         .hero-main,
@@ -169,6 +181,16 @@
             height: 240px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(124, 210, 255, 0.24), transparent 68%);
+        }
+
+        .hero-main::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(110, 255, 184, 0.03) 46%, transparent 52%);
+            background-size: 100% 14px;
+            opacity: 0.18;
+            pointer-events: none;
         }
 
         .eyebrow,
@@ -250,8 +272,8 @@
 
         .btn {
             color: #08111f;
-            background: linear-gradient(135deg, var(--accent-warm), var(--accent));
-            box-shadow: 0 18px 34px rgba(124, 210, 255, 0.18);
+            background: linear-gradient(135deg, var(--cyber), var(--accent));
+            box-shadow: 0 18px 34px rgba(46, 234, 143, 0.16);
         }
 
         .btn-secondary,
@@ -430,6 +452,192 @@
             background: linear-gradient(135deg, rgba(124, 210, 255, 0.14), rgba(156, 240, 221, 0.08));
         }
 
+        .contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 28rem;
+            height: 28rem;
+            left: var(--glow-x, 50%);
+            top: var(--glow-y, 20%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(110, 255, 184, 0.16), transparent 62%);
+            filter: blur(24px);
+            pointer-events: none;
+            z-index: -1;
+            transition: left 0.18s linear, top 0.18s linear;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(38px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.08s; }
+
+        .tilt-card,
+        .magnetic,
+        .spotlight-card {
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .tilt-card {
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .tilt-card:hover {
+            border-color: rgba(124, 210, 255, 0.3);
+            box-shadow: 0 36px 90px rgba(0, 0, 0, 0.42);
+        }
+
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight-card::before {
+            content: "";
+            position: absolute;
+            inset: -20%;
+            background: radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(124, 210, 255, 0.18), transparent 28%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+
+        .experience-place {
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .terminal-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(5, 11, 18, 0.98), rgba(7, 17, 28, 0.95));
+            border-color: rgba(110, 255, 184, 0.16);
+        }
+
+        .terminal-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(110, 255, 184, 0.08), transparent);
+            transform: translateY(-100%);
+            animation: scan 5s linear infinite;
+            pointer-events: none;
+        }
+
+        .terminal-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.45rem;
+        }
+
+        .terminal-dots span {
+            width: 0.72rem;
+            height: 0.72rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        .terminal-dots span:nth-child(1) { background: #ff6a6a; }
+        .terminal-dots span:nth-child(2) { background: #ffd36a; }
+        .terminal-dots span:nth-child(3) { background: var(--cyber); }
+
+        .terminal-label {
+            color: var(--cyber);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .terminal-screen {
+            display: grid;
+            gap: 0.7rem;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 0.92rem;
+            color: #d7ffe8;
+        }
+
+        .terminal-line {
+            display: flex;
+            gap: 0.7rem;
+            align-items: flex-start;
+        }
+
+        .terminal-prompt {
+            color: var(--cyber);
+            font-weight: 700;
+        }
+
+        .typed-line {
+            min-height: 1.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .typed-line::after {
+            content: "_";
+            color: var(--cyber);
+            animation: blink 1s steps(1, end) infinite;
+            margin-left: 0.08rem;
+        }
+
+        .terminal-log {
+            color: #91bba5;
+        }
+
+        .terminal-success {
+            color: var(--cyber);
+        }
+
+        .cyber-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.7rem;
+            margin-top: 0.6rem;
+        }
+
+        .cyber-grid .stack-item {
+            background: rgba(110, 255, 184, 0.05);
+            border-color: rgba(110, 255, 184, 0.08);
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        @keyframes scan {
+            to { transform: translateY(100%); }
+        }
+
         footer { padding: 0 0 2.2rem; font-size: 0.92rem; }
 
         @media (max-width: 1024px) {
@@ -438,6 +646,7 @@
             .skills-grid,
             .timeline,
             .experience-grid { grid-template-columns: 1fr; }
+            .cyber-grid { grid-template-columns: 1fr; }
             .hero h1 { max-width: none; }
         }
 
@@ -464,6 +673,7 @@
     </style>
 </head>
 <body>
+    <div class="ambient-glow" aria-hidden="true"></div>
     <header class="topbar">
         <div class="container topbar-inner">
             <a class="brand" href="#accueil">
@@ -474,96 +684,123 @@
                 </span>
             </a>
 
-            <nav>
+            <nav class="nav-links">
                 <a href="#accueil">Accueil</a>
                 <a href="#projets">Projets</a>
                 <a href="#parcours">Parcours</a>
                 <a href="#experience">Experience</a>
                 <a href="#competences">Competences</a>
-                <a href="mailto:nael.talbi@example.com">Contact</a>
+                <a href="#contact">Contact</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
-        <section class="hero" id="accueil">
+        <section class="hero reveal" id="accueil">
             <div class="hero-shell">
-                <div class="hero-main">
-                    <span class="eyebrow">Infrastructure - Systeme - Reseau</span>
-                    <h1>Je construis des environnements IT fiables, lisibles et prets a evoluer.</h1>
+                <div class="hero-column">
+                <div class="hero-main tilt-card spotlight-card">
+                    <span class="eyebrow">Infrastructure - Support - Cyber en progression</span>
+                    <h1>Je fais tourner des environnements IT propres, fiables et humains.</h1>
                     <p>
-                        Etudiant en BTS SIO, je developpe des projets orientes administration systeme, services reseau
-                        et support informatique. Ce portfolio presente un profil technique, rigoureux et capable de
-                        transformer un besoin terrain en solution concrete.
+                        Informaticien en alternance a la Clinique Saint Roch Marseille, je travaille entre support,
+                        administration systeme et accompagnement utilisateur. Je construis un profil operationnel
+                        aujourd hui, avec une trajectoire claire vers la cybersecurite et le pentest.
                     </p>
 
                     <div class="hero-actions">
-                        <a class="btn" href="#projets">Voir mes realisations</a>
-                        <a class="btn-secondary" href="#competences">Explorer mes competences</a>
+                        <a class="btn magnetic" href="#experience">Voir mon experience</a>
+                        <a class="btn-secondary magnetic" href="#competences">Explorer mes competences</a>
                     </div>
 
                     <div class="social-links">
-                        <a class="social-link" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-                        <a class="social-link" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
-                        <a class="social-link" href="mailto:nael.talbi@example.com">Email</a>
+                        <a class="social-link magnetic" href="https://github.com/WazapCMD" target="_blank" rel="noreferrer">GitHub / WazapCMD</a>
+                        <a class="social-link magnetic" href="https://www.linkedin.com/in/talbi-nael-57312a353/" target="_blank" rel="noreferrer">LinkedIn</a>
+                        <a class="social-link magnetic" href="mailto:talbinael10@gmail.com">talbinael10@gmail.com</a>
                     </div>
 
                     <div class="hero-metrics">
                         <div class="metric">
-                            <strong>3+</strong>
-                            <span>projets techniques presentes</span>
+                            <strong data-count="3">0</strong>
+                            <span>axes techniques visibles</span>
                         </div>
                         <div class="metric">
-                            <strong>BTS SIO</strong>
-                            <span>orientation SISR et infrastructure</span>
+                            <strong>Clinique</strong>
+                            <span>support et informatique terrain</span>
                         </div>
                         <div class="metric">
-                            <strong>Support IT</strong>
-                            <span>approche terrain et resolution</span>
+                            <strong>Cyber</strong>
+                            <span>premiers pas vers le pentest</span>
                         </div>
                     </div>
                 </div>
 
-                <aside class="hero-side">
+                <div class="panel terminal-card tilt-card reveal delay-1">
+                    <div class="terminal-top">
+                        <div class="terminal-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="terminal-label">cmd.exe / cyber-profile</span>
+                    </div>
+
+                    <div class="terminal-screen">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">C:\Users\Nael&gt;</span>
+                            <span class="typed-line" data-typed="scan_profile --role informaticien --location saint-roch-marseille"></span>
+                        </div>
+                        <div class="terminal-log">[ok] support utilisateur actif</div>
+                        <div class="terminal-log">[ok] administration systeme en progression</div>
+                        <div class="terminal-success">[next] target: cybersecurite / pentest</div>
+                    </div>
+                </div>
+                </div>
+
+                <aside class="hero-side reveal delay-1 tilt-card">
                     <div class="profile-card">
                         <small>Positionnement</small>
-                        <h2>Un portfolio personnel plus premium, inspire des sites modernes de presentation.</h2>
+                        <h2>Une direction plus cyber, plus nerveuse, avec des effets de terminal et de veille active.</h2>
                         <p>
-                            Grande typographie, cartes profondes, ambiance tech elegante et hierarchie visuelle plus
-                            claire pour donner une impression immediate de serieux.
+                            L objectif ici est de melanger credibilite pro, support terrain et imaginaire cyber
+                            sans tomber dans le decoratif gratuit.
                         </p>
                     </div>
 
-                    <div class="stack-list">
+                    <div class="cyber-grid">
                         <div class="stack-item">
-                            <strong>Administration Windows</strong>
-                            <span>AD, GPO, utilisateurs</span>
+                            <strong>Poste actuel</strong>
+                            <span>Alternance</span>
                         </div>
                         <div class="stack-item">
-                            <strong>Gestion de parc</strong>
-                            <span>GLPI, ticketing, inventaire</span>
+                            <strong>Site</strong>
+                            <span>Clinique Saint Roch</span>
                         </div>
                         <div class="stack-item">
-                            <strong>Reseaux locaux</strong>
-                            <span>LAN, VLAN, DHCP, DNS</span>
+                            <strong>Focus</strong>
+                            <span>Support + infra</span>
+                        </div>
+                        <div class="stack-item">
+                            <strong>Next step</strong>
+                            <span>Pentest</span>
                         </div>
                     </div>
 
                     <ul class="mini-list">
                         <li>
-                            <strong>Objectif</strong>
-                            <span>Presenter un profil clair et credible</span>
+                            <strong>Etat</strong>
+                            <span>Operationnel aujourd hui</span>
                         </li>
                         <li>
-                            <strong>Style</strong>
-                            <span>Sobre, digital, structure</span>
+                            <strong>Objectif</strong>
+                            <span>Metier cyber a terme</span>
                         </li>
                     </ul>
                 </aside>
             </div>
         </section>
 
-        <section id="projets">
+        <section id="projets" class="reveal">
             <div class="section-head">
                 <div>
                     <span class="section-tag">Projets</span>
@@ -576,7 +813,7 @@
             </div>
 
             <div class="projects-grid">
-                <article class="panel project-card">
+                <article class="panel project-card tilt-card">
                     <div class="project-top">
                         <span class="project-badge">AD</span>
                         <span class="project-kicker">Infrastructure</span>
@@ -595,7 +832,7 @@
                     </div>
                 </article>
 
-                <article class="panel project-card">
+                <article class="panel project-card tilt-card">
                     <div class="project-top">
                         <span class="project-badge">IT</span>
                         <span class="project-kicker">Support</span>
@@ -613,7 +850,7 @@
                     </div>
                 </article>
 
-                <article class="panel project-card">
+                <article class="panel project-card tilt-card">
                     <div class="project-top">
                         <span class="project-badge">NET</span>
                         <span class="project-kicker">Reseau</span>
@@ -634,7 +871,7 @@
             </div>
         </section>
 
-        <section id="parcours">
+        <section id="parcours" class="reveal">
             <div class="section-head">
                 <div>
                     <span class="section-tag">Parcours</span>
@@ -647,7 +884,7 @@
             </div>
 
             <div class="timeline">
-                <article class="timeline-item">
+                <article class="timeline-item panel tilt-card">
                     <span class="timeline-year">Aujourd hui</span>
                     <h3>BTS SIO</h3>
                     <p>
@@ -656,72 +893,78 @@
                     </p>
                 </article>
 
-                <article class="timeline-item">
+                <article class="timeline-item panel tilt-card">
                     <span class="timeline-year">Montee en puissance</span>
-                    <h3>Orientation SISR</h3>
+                    <h3>Orientation SISR puis cyber</h3>
                     <p>
-                        Mise en pratique sur des cas concrets melant deploiement, configuration, gestion des incidents
-                        et documentation d environnements techniques.
+                        Mon objectif est de partir d un socle solide en infrastructure et support pour evoluer
+                        durablement vers la cybersecurite et le pentest.
                     </p>
                 </article>
             </div>
         </section>
 
-        <section id="experience">
+        <section id="experience" class="reveal">
             <div class="section-head">
                 <div>
                     <span class="section-tag">Experience</span>
-                    <h2>Ce que je peux apporter en entreprise</h2>
+                    <h2>Alternance actuelle</h2>
                 </div>
                 <p>
-                    Une lecture plus orientee terrain du profil, pour montrer la valeur operationnelle au dela des
-                    projets scolaires.
+                    Une experience terrain deja concrete, au contact des utilisateurs, des postes et des besoins
+                    quotidiens d une structure de sante.
                 </p>
             </div>
 
             <div class="experience-grid">
-                <article class="experience-card">
+                <article class="experience-card panel tilt-card spotlight-card">
                     <div class="experience-top">
-                        <h3>Support et assistance</h3>
-                        <span class="experience-date">Usage quotidien</span>
+                        <div>
+                            <span class="experience-date">Actuellement</span>
+                            <h3>Informaticien en alternance</h3>
+                        </div>
+                        <span class="experience-place">Clinique Saint Roch Marseille</span>
                     </div>
-                    <p>Intervenir sur les incidents, qualifier un probleme et proposer une resolution claire aux utilisateurs.</p>
+                    <p>J interviens sur le support informatique, la resolution des incidents et le maintien d un environnement de travail fiable pour les equipes.</p>
                     <ul>
-                        <li>Diagnostic poste, compte, acces et connectivite</li>
-                        <li>Communication simple et rassurante avec les utilisateurs</li>
-                        <li>Suivi des demandes et priorisation</li>
+                        <li>Support utilisateurs et diagnostic quotidien</li>
+                        <li>Suivi des postes, comptes, acces et outils internes</li>
+                        <li>Participation a la stabilite du parc informatique</li>
                     </ul>
                 </article>
 
-                <article class="experience-card">
+                <article class="experience-card panel tilt-card spotlight-card">
                     <div class="experience-top">
-                        <h3>Administration et maintenance</h3>
-                        <span class="experience-date">Environnement Windows</span>
+                        <div>
+                            <span class="experience-date">Valeur ajoutee</span>
+                            <h3>Approche terrain</h3>
+                        </div>
+                        <span class="experience-place">Support + rigueur</span>
                     </div>
-                    <p>Participer a la gestion d un parc, maintenir des services et garder une base technique propre.</p>
+                    <p>Cette alternance m apprend a garder un bon niveau technique tout en restant rapide, calme et clair dans les echanges avec les utilisateurs.</p>
                     <ul>
-                        <li>Creation de comptes, groupes et droits</li>
-                        <li>Controle des configurations et des strategies</li>
-                        <li>Documentation et reprise des procedures</li>
+                        <li>Priorisation des demandes</li>
+                        <li>Communication simple et rassurante</li>
+                        <li>Reflexe de documentation et d amelioration continue</li>
                     </ul>
                 </article>
             </div>
         </section>
 
-        <section id="competences">
+        <section id="competences" class="reveal">
             <div class="section-head">
                 <div>
                     <span class="section-tag">Competences</span>
-                    <h2>Ce que je sais mettre en place</h2>
+                    <h2>Socle actuel et direction future</h2>
                 </div>
                 <p>
-                    Les competences ci dessous refletent un profil polyvalent, tourne a la fois vers la mise en oeuvre,
-                    l administration quotidienne et l accompagnement des utilisateurs.
+                    Une base solide en support, systeme et reseau, avec une orientation de plus en plus nette
+                    vers la cybersecurite et les pratiques de pentest.
                 </p>
             </div>
 
             <div class="skills-grid">
-                <article class="skill-card">
+                <article class="skill-card panel tilt-card">
                     <h3>Systeme</h3>
                     <p>Configuration de serveurs, gestion des comptes, politiques de securite et maintenance d environnement Windows.</p>
                     <div class="chips">
@@ -732,7 +975,7 @@
                     </div>
                 </article>
 
-                <article class="skill-card">
+                <article class="skill-card panel tilt-card">
                     <h3>Reseau</h3>
                     <p>Conception de topologies locales, segmentation logique du trafic et configuration des services d adressage.</p>
                     <div class="chips">
@@ -743,7 +986,7 @@
                     </div>
                 </article>
 
-                <article class="skill-card">
+                <article class="skill-card panel tilt-card">
                     <h3>Support et gestion</h3>
                     <p>Suivi des incidents, organisation du support utilisateur et structuration des demandes grace aux bons outils.</p>
                     <div class="chips">
@@ -753,24 +996,40 @@
                         <span>Diagnostic</span>
                     </div>
                 </article>
+
+                <article class="skill-card panel tilt-card spotlight-card">
+                    <h3>Cybersecurite en apprentissage</h3>
+                    <p>Je commence la cybersecurite et le pentest, avec l objectif d en faire mon metier a terme.</p>
+                    <div class="chips">
+                        <span>Cyber basics</span>
+                        <span>Pentest</span>
+                        <span>Veille securite</span>
+                        <span>Objectif metier</span>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <div class="contact-strip">
+        <div class="contact-strip reveal panel" id="contact">
             <div>
                 <span class="section-tag">Contact</span>
-                <h2>Disponible pour echanger sur un stage, une alternance ou un projet.</h2>
+                <h2>Mes liens sont maintenant branches sur mes vraies infos.</h2>
                 <p>
-                    Pensez a remplacer les liens GitHub, LinkedIn et l adresse email par vos vraies informations pour
-                    finaliser le portfolio.
+                    Vous pouvez me joindre par mail ou retrouver mon profil sur GitHub et LinkedIn
+                    depuis cette section comme depuis le hero.
                 </p>
             </div>
-            <a class="btn" href="mailto:nael.talbi@example.com">Me contacter</a>
+            <div class="contact-actions">
+                <a class="btn magnetic" href="mailto:talbinael10@gmail.com">talbinael10@gmail.com</a>
+                <a class="btn-secondary magnetic" href="https://github.com/WazapCMD" target="_blank" rel="noreferrer">GitHub</a>
+                <a class="btn-secondary magnetic" href="https://www.linkedin.com/in/talbi-nael-57312a353/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
         </div>
     </main>
 
     <footer class="container">
-        <p>&copy; 2026 Nael Talbi. Portfolio repense dans une esthetique tech premium inspiree d un site personnel moderne.</p>
+        <p>&copy; 2026 Nael Talbi. Portfolio repense avec animations JavaScript dans un esprit moderne inspire par huppy.cloud.</p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
